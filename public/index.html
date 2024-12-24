@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commande Robot</title>
+    <!-- Lien vers Google Fonts pour la police Roboto -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Lien vers Font Awesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            background-image: url('background.jpg');
+            background-size: cover;
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            position: relative;
+        }
+
+        /* Titre */
+        h1 {
+            color: white;
+            position: absolute;
+            top: 40%;
+            right: 13%;
+            margin: 0;
+            font-size: 3em;
+            font-weight: 700;
+            font-family: 'Roboto', sans-serif;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+            animation: fadeIn 1s ease-out;
+        }
+
+        /* Animation du titre */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Conteneur des boutons */
+        .button-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 15px;
+            justify-items: center;
+            align-items: center;
+            max-width: 400px;
+            margin: 0 auto;
+            position: relative;
+            top: 20%;
+            left: 20%;
+        }
+
+        /* Style des boutons */
+        button {
+            padding: 20px 40px;
+            font-size: 22px;
+            cursor: pointer;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        /* Effet hover pour les boutons */
+        button:hover {
+            background-color: #0056b3;
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Positionnement des flèches */
+        .up {
+            grid-column: 2;
+            grid-row: 1;
+        }
+
+        .left {
+            grid-column: 1;
+            grid-row: 2;
+        }
+
+        .down {
+            grid-column: 2;
+            grid-row: 2;
+            font-size: 2em;
+            color: red; /* Couleur rouge pour l'icône de Stop */
+        }
+
+        .right {
+            grid-column: 3;
+            grid-row: 2;
+        }
+
+        /* Section info projet */
+        .project-info {
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            max-width: 600px;
+            position: absolute; /* Positionner l'élément en fonction du parent */
+            top: 10px; /* Distance du haut de la page */
+            right: 10px; /* Distance du côté droit de la page */
+            animation: fadeIn 2s ease-out;
+        }
+
+
+        .project-info p {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: #FFD700;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .button-container {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 1fr 1fr 1fr;
+                top: 15%;
+            }
+
+            button {
+                padding: 15px 30px;
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .button-container {
+                grid-template-columns: 1fr;
+                grid-template-rows: 1fr 1fr 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Commande du Robot</h1>
+    <div class="button-container">
+        <button class="up" onclick="sendCommand('8')">↑</button>
+        <button class="left" onclick="sendCommand('4')">←</button>
+        <button class="down" onclick="sendCommand('0')"><i class="fas fa-stop"></i></button>
+        <button class="right" onclick="sendCommand('6')">→</button>
+    </div>
+
+    <!-- Section d'information sur le projet -->
+    <div class="project-info">
+        <p><span class="highlight">Projet FreeRTOS</span></p>
+        <p><span class="highlight">Réalisé par :</span> Mohamed Ali LATRACH & Mohamed Ali TURKI</p>
+        <p><span class="highlight">Encadré par :</span> M. Khaled JELASSI</p>
+        <p><span class="highlight">Promotion :</span> 2024/2025 </p>
+
+    </div>
+
+    <script src="frontend.js"></script>
+</body>
+</html>
