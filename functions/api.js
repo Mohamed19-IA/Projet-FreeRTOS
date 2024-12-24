@@ -1,7 +1,9 @@
 const express = require('express');
 const mqtt = require('mqtt');
+const serverless = require('serverless-http');
+
 const app = express();
-const PORT = 3000;
+const router = express.Router();
 
 let latestData = 'No data yet'; // Stocke la dernière donnée reçue
 
@@ -23,11 +25,8 @@ mqttClient.on('message', (topic, message) => {
   }
 });
 
-// Middleware pour servir les fichiers statiques du dossier 'public' (HTML, CSS, JS)
-app.use(express.static('public'));
-
 // Endpoint pour envoyer des commandes MQTT à l'ESP32
-app.get('/send-command/:command', (req, res) => {
+router.get('/send-command/:command', (req, res) => {
   const command = req.params.command;
   mqttClient.publish('esp32/commands', command); // Publication de la commande sur le topic 'esp32/commands'
   console.log(`Commande "${command}" envoyée à l'ESP32`);
@@ -35,11 +34,10 @@ app.get('/send-command/:command', (req, res) => {
 });
 
 // Endpoint pour récupérer la dernière donnée reçue du topic 'esp32/data'
-app.get('/esp32-data', (req, res) => {
-  res.json({ message: latestData }); // Envoie des données en JSON au client (dashboard)
+router.get('/esp32-data', (req, res) => {
+  res.json({ message: latestData });
 });
 
-// Démarrage du serveur Express
-app.listen(PORT, () => {
-  console.log(`Serveur démarré sur http://localhost:${PORT}`);
-});
+app.use('/.netlify/functions/api', router);
+
+module.exports.handler = serverless(app);

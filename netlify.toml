@@ -1,0 +1,9 @@
+[build]
+  publish = "public"  # Le dossier où Netlify va chercher les fichiers statiques
+  functions = "functions"  # Le dossier contenant les fonctions serverless
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = true
